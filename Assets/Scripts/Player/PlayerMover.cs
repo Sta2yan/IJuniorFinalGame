@@ -46,13 +46,6 @@ public class PlayerMover : MonoBehaviour
             _transformPositionX = transform.position.x;
             _transformPositionZ = transform.position.z;
 
-            //Для телефона, после билда
-            //
-            //if (Input.touchCount == 0)
-            //    _targetPosition = Vector3.zero;
-            //else if (Input.GetTouch(0).phase == TouchPhase.Stationary)
-            //    _targetPosition = Vector3.zero;
-
             Move(_distance);
             HorizontalRotate(_transformPositionX);
             VerticalRotate(_transformPositionZ);
