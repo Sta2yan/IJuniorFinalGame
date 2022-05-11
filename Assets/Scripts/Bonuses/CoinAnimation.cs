@@ -5,12 +5,12 @@ using DG.Tweening;
 public class CoinAnimation : MonoBehaviour
 {
     private const string CollectedAnimation = "Collect";
+    private const float StartAnimTime = 1.7f;
+    private const float EndAnimPositionY = 1.25f;
 
     [SerializeField] private float _collectAnimPositionY = 3f;
 
     private Animator _animator;
-    private float _startAnimTime = 1.7f;
-    private float _endAnimPositionY = 1.25f;
 
     private void Awake()
     {
@@ -19,13 +19,13 @@ public class CoinAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        transform.DOMoveY(_endAnimPositionY, _startAnimTime).SetEase(Ease.OutCirc);
+        transform.DOMoveY(EndAnimPositionY, StartAnimTime).SetEase(Ease.OutCirc);
     }
 
     public void Collect()
     {
         _animator.SetTrigger(CollectedAnimation);
-        transform.DOMoveY(_collectAnimPositionY, _startAnimTime);
+        transform.DOMoveY(_collectAnimPositionY, StartAnimTime);
     }
 
     private void Delete()

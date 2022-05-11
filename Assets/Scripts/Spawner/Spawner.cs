@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Spawner : ObjectPool
 {
+    private const float Sleep = 4.3f;
+
     [SerializeField] private GameObject _template;
     [SerializeField] private float _maxSecondsBetweenSpawn;
     [SerializeField] private float _minSecondsBetweenSpawn;
@@ -13,7 +15,6 @@ public class Spawner : ObjectPool
     private float _secondsBetweenSpawn;
     private float _elapsedSpawnTime = 0f;
     private float _elapsedMultiplyTime = 0f;
-    private float _sleep = 4.3f;
     private Coroutine _coroutine;
 
     private void Start()
@@ -58,15 +59,15 @@ public class Spawner : ObjectPool
         float maxNormalSecondsBetweenSpawn = _maxSecondsBetweenSpawn;
         float minNormalSecondsBetweenSpawn = _minSecondsBetweenSpawn;
 
-        _maxSecondsBetweenSpawn /= _sleep;
-        _minSecondsBetweenSpawn /= _sleep;
+        _maxSecondsBetweenSpawn /= Sleep;
+        _minSecondsBetweenSpawn /= Sleep;
 
         _secondsBetweenSpawn = Random.Range(_minSecondsBetweenSpawn, _maxSecondsBetweenSpawn);
 
         foreach (var item in Pool)
             item.GetComponent<Wave>().UpSpeed();
 
-        yield return new WaitForSeconds(_sleep);
+        yield return new WaitForSeconds(Sleep);
 
         foreach (var item in Pool)
             item.GetComponent<Wave>().DownSpeed();

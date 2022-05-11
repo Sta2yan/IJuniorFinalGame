@@ -3,6 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Player))]
 public class PlayerMover : MonoBehaviour
 {
+    private const float DistanceMultiplier = 2f;
+    private const float MultiplyAngleRotation = 1700f;
+    private const float MultiplyTimeRotation = 2;
+
     [SerializeField] private float _speed;
     [SerializeField] private float _maxPositionX;
     [SerializeField] private float _minPositionX;
@@ -10,14 +14,11 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _minPositionZ;
 
     private Vector3 _targetPosition;
+    private Player _player;
     private float _distance;
-    private float _distanceMultiplier = 2f;
     private float _transformPositionX;
     private float _transformPositionZ;
-    private float _multiplyAngleRotation = 1700f;
-    private float _multiplyTimeRotation = 2;
     private bool _isActive = true;
-    private Player _player;
 
     private void Awake()
     {
@@ -67,7 +68,7 @@ public class PlayerMover : MonoBehaviour
     private void Move(float distance)
     {
         if (_targetPosition != transform.position)
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * distance / _distanceMultiplier * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * distance / DistanceMultiplier * Time.deltaTime);
     }
 
     private void HorizontalRotate(float positionX)
@@ -76,30 +77,30 @@ public class PlayerMover : MonoBehaviour
             transform.localRotation = Quaternion.Lerp(transform.localRotation,
                                                       Quaternion.Euler(transform.rotation.x,
                                                                        transform.rotation.y,
-                                                                       transform.rotation.z + ((positionX - transform.position.x) * _multiplyAngleRotation)),
-                                                      Time.deltaTime * _multiplyTimeRotation);
+                                                                       transform.rotation.z + ((positionX - transform.position.x) * MultiplyAngleRotation)),
+                                                      Time.deltaTime * MultiplyTimeRotation);
         else if (positionX > transform.position.x)
             transform.localRotation = Quaternion.Lerp(transform.localRotation,
                                                       Quaternion.Euler(transform.rotation.x,
                                                                        transform.rotation.y,
-                                                                       transform.rotation.z - ((transform.position.x - positionX) * _multiplyAngleRotation)),
-                                                      Time.deltaTime * _multiplyTimeRotation);
+                                                                       transform.rotation.z - ((transform.position.x - positionX) * MultiplyAngleRotation)),
+                                                      Time.deltaTime * MultiplyTimeRotation);
     }
 
     private void VerticalRotate(float positionZ)
     {
         if (positionZ < transform.position.z)
             transform.localRotation = Quaternion.Lerp(transform.localRotation,
-                                                      Quaternion.Euler(transform.rotation.x + ((transform.position.z - positionZ) * _multiplyAngleRotation),
+                                                      Quaternion.Euler(transform.rotation.x + ((transform.position.z - positionZ) * MultiplyAngleRotation),
                                                                        transform.rotation.y,
                                                                        transform.rotation.z),
-                                                      Time.deltaTime * _multiplyTimeRotation);
+                                                      Time.deltaTime * MultiplyTimeRotation);
         else if (positionZ > transform.position.z)
             transform.localRotation = Quaternion.Lerp(transform.localRotation,
-                                                      Quaternion.Euler(transform.rotation.x - ((positionZ - transform.position.z) * _multiplyAngleRotation),
+                                                      Quaternion.Euler(transform.rotation.x - ((positionZ - transform.position.z) * MultiplyAngleRotation),
                                                                        transform.rotation.y,
                                                                        transform.rotation.z),
-                                                      Time.deltaTime * _multiplyTimeRotation);
+                                                      Time.deltaTime * MultiplyTimeRotation);
     }
 
     private void SetTargetPositionX(float position)

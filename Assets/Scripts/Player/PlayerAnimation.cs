@@ -5,8 +5,8 @@ using UnityEngine.Playables;
 [RequireComponent(typeof(Animator), typeof(Player))]
 public class PlayerAnimation : MonoBehaviour
 {
-    private readonly string StartTrigger = "Jump";
-    private readonly string DieTrigger = "Die";
+    private const string StartTrigger = "Jump";
+    private const string DieTrigger = "Die";
 
     [SerializeField] private Menu _menu;
     [SerializeField] private PlayableDirector _playableDirector;

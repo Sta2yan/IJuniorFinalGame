@@ -5,12 +5,13 @@ using UnityEngine.Events;
 [RequireComponent(typeof(BoxCollider), typeof(Rigidbody))]
 public class Player : MonoBehaviour
 {
+    private const float Sleep = 5f;
+
     [SerializeField] private Vector3 _startPosition;
 
-    private float _sleep = 5f;
-    private bool _isInvulnerability;
     private Rigidbody _rigidbody;
     private BoxCollider _boxCollider;
+    private bool _isInvulnerability;
 
     public UnityAction WaveCompleted;
     public UnityAction CoinCollected;
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
     {
         _isInvulnerability = true;
 
-        yield return new WaitForSeconds(_sleep);
+        yield return new WaitForSeconds(Sleep);
 
         _isInvulnerability = false;
     }

@@ -4,8 +4,9 @@ using UnityEngine.Events;
 
 public class Score : MonoBehaviour
 {
-    private readonly string LastScoreKey = "LastScore";
-    private readonly string BestScoreKey = "BestScore";
+    private const string LastScoreKey = "LastScore";
+    private const string BestScoreKey = "BestScore";
+    private const int ScoreUp = 5;
 
     [SerializeField] private Player _player;
 
@@ -54,7 +55,7 @@ public class Score : MonoBehaviour
 
     private void OnCoinCollected()
     {
-        _score += 5;
+        _score += ScoreUp;
         ScoreChanged?.Invoke();
     }
 
