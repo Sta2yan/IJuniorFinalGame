@@ -14,7 +14,7 @@ public class Score : MonoBehaviour
     private int _lastScore = 0;
     private int _bestScore = 0;
 
-    public UnityAction ScoreChanged;
+    public event UnityAction ScoreChanged;
 
     public int CurrentScore => _score;
     public int LastScore => _lastScore;

@@ -5,7 +5,7 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject _startPanel;
 
-    public UnityAction GameStarted;
+    public event UnityAction GameStarted;
 
     private void Start()
     {

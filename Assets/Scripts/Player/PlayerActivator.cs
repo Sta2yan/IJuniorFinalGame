@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Player), typeof(PlayerInput), typeof(PlayerMover))]
+[RequireComponent(typeof(BoxCollider))]
 public class PlayerActivator : MonoBehaviour
 {
     [SerializeField] private GameStart _gameStart;

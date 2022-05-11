@@ -13,10 +13,10 @@ public class Player : MonoBehaviour
     private BoxCollider _boxCollider;
     private bool _isInvulnerability;
 
-    public UnityAction WaveCompleted;
-    public UnityAction CoinCollected;
-    public UnityAction Died;
-    public UnityAction RingCollected;
+    public event UnityAction WaveCompleted;
+    public event UnityAction CoinCollected;
+    public event UnityAction Died;
+    public event UnityAction RingCollected;
 
     private void Awake()
     {
@@ -57,10 +57,10 @@ public class Player : MonoBehaviour
 
     private void SetInvulnerability()
     {
-        StartCoroutine(Invulnerability());
+        StartCoroutine(BecomeInvulnerable());
     }
 
-    private IEnumerator Invulnerability()
+    private IEnumerator BecomeInvulnerable()
     {
         _isInvulnerability = true;
 
